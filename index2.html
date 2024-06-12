@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Photo Gallery</title>
+
+    <link rel="stylesheet" type="text/css" href="css/normalize.css" />
+    <link rel="stylesheet" type="text/css" href="css/demo.css" />
+    <link rel="stylesheet" type="text/css" href="css/video.css" />
+    <link rel="stylesheet" type="text/css" href="css/main.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet" />
+    <script>
+        document.documentElement.className = "js";
+    </script>
+</head>
+<body class="demo-3 loading">
+    <svg class="hidden">
+        <symbol id="icon-arrow-nav" viewBox="208.3 352 4.2 6.4">
+            <title>arrow-nav</title>
+            <polygon points="212.1,357.3 211.5,358 208.7,355.1 211.5,352.3 212.1,353 209.9,355.1"></polygon>
+        </symbol>
+    </svg>
+    <main class="site-wrapper">
+        <div class="content content--fixed">
+            <header class="nav-header">
+                <h1 class="site_title">Photo Gallery</h1>
+                <a class="header_item" href="index2.html"><span><h3>Video</h3></span></a>
+                <a class="header_item" href="index.html"><span><h3>Images</h3></span></a>
+            </header>
+        </div>
+        <div class="content">
+            <div class="video-container">
+                <video class="video" id="my-video" preload="auto">
+					<source src="video/video.mp4" type="video/mp4" />
+					<p>Your browser doesn't support HTML5 video.</p>
+				</video>
+                <div id="video-controls">
+                    <button id="play-btn">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+							<path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd" />
+						</svg>
+						Play
+						  </button>
+                    <button id="pause-btn">
+						
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+							<path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 0 1 .75-.75H9a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H7.5a.75.75 0 0 1-.75-.75V5.25Zm7.5 0A.75.75 0 0 1 15 4.5h1.5a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H15a.75.75 0 0 1-.75-.75V5.25Z" clip-rule="evenodd" />
+						</svg>
+						Pause
+					</button>
+                    <input type="range" id="seek-bar" value="0">
+                    <button id="speed-btn">1x</button>
+                    <button id="mute-btn">🔊</button>
+                    <input type="range" id="volume-bar" min="0" max="1" step="0.1" value="1">
+                    <button type="button" id="full-screen-btn">
+						<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+							<path fill-rule="evenodd" d="M2.25 5.25a3 3 0 0 1 3-3h13.5a3 3 0 0 1 3 3V15a3 3 0 0 1-3 3h-3v.257c0 .597.237 1.17.659 1.591l.621.622a.75.75 0 0 1-.53 1.28h-9a.75.75 0 0 1-.53-1.28l.621-.622a2.25 2.25 0 0 0 .659-1.59V18h-3a3 3 0 0 1-3-3V5.25Zm1.5 0v7.5a1.5 1.5 0 0 0 1.5 1.5h13.5a1.5 1.5 0 0 0 1.5-1.5v-7.5a1.5 1.5 0 0 0-1.5-1.5H5.25a1.5 1.5 0 0 0-1.5 1.5Z" clip-rule="evenodd" />
+						  </svg>
+						  
+						Fullscreen</button>
+                </div>
+            </div>
+            </div>
+        </div>
+    </main>
+    <script src="js/demo.js"></script>
+    <script src="js/pixi.min.js"></script>
+    <script src="js/TweenMax.min.js"></script>
+    <script src="js/main3.js"></script>
+    <script src="js/mouse-trail.js"></script>
+    <script src="js/imagesloaded.pkgd.min.js"></script>
+    <script src="js/audio.js"></script>
+    <script>
+        imagesLoaded(document.body, () => document.body.classList.remove("loading"));
+
+		const video = document.getElementById('my-video');
+const playBtn = document.getElementById('play-btn');
+const pauseBtn = document.getElementById('pause-btn');
+const seekBar = document.getElementById('seek-bar');
+const volumeBar = document.getElementById('volume-bar');
+const muteBtn = document.getElementById('mute-btn');
+const speedBtn = document.getElementById('speed-btn');
+const fullscreenButton = document.getElementById('full-screen-btn');
+
+// Play/Pause Functionality
+playBtn.addEventListener('click', () => {
+  video.play();
+});
+
+pauseBtn.addEventListener('click', () => {
+  video.pause();
+});
+
+// Seek functionality
+seekBar.addEventListener('input', () => {
+  const seekTime = (video.duration / 100) * seekBar.value;
+  video.currentTime = seekTime;
+});
+
+// Update seek bar as video plays
+video.addEventListener('timeupdate', () => {
+  const currentTime = video.currentTime;
+  const duration = video.duration;
+  const progress = (currentTime / duration) * 100;
+  seekBar.value = progress;
+});
+
+// Volume functionality
+volumeBar.addEventListener('input', () => {
+  video.volume = volumeBar.value;
+});
+
+// Mute functionality
+muteBtn.addEventListener('click', () => {
+  if (video.volume === 0) {
+    // Unmute
+    video.volume = 1;
+    muteBtn.textContent = 'Mute';
+  } else {
+    // Mute
+    video.volume = 0;
+    muteBtn.textContent = 'Unmute';
+  }
+});
+
+// Playback speed functionality
+speedBtn.addEventListener('click', () => {
+  const currentSpeed = video.playbackRate;
+  if (currentSpeed === 1) {
+    // Set playback speed to 1.5x
+    video.playbackRate = 1.5;
+    speedBtn.textContent = 'Speed: 1.5x';
+  } else if (currentSpeed === 1.5) {
+    // Set playback speed to 2x
+    video.playbackRate = 2;
+    speedBtn.textContent = 'Speed: 2x';
+  } else {
+    // Set playback speed to 1x (default)
+    video.playbackRate = 1;
+    speedBtn.textContent = 'Speed: 1x';
+  }
+});
+
+// Fullscreen functionality
+fullscreenButton.addEventListener('click', () => {
+  if (video.requestFullscreen) {
+    video.requestFullscreen();
+  } else if (video.mozRequestFullScreen) {
+    video.mozRequestFullScreen();
+  } else if (video.webkitRequestFullscreen) {
+    video.webkitRequestFullscreen();
+  } else if (video.msRequestFullscreen) {
+    video.msRequestFullscreen();
+  }
+});
+    </script>
+</body>
+</html>

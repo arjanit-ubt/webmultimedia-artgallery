@@ -1,0 +1,181 @@
+.pater {
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+	position: fixed;
+	z-index: 1000;
+	right: 0;
+	bottom: 0;
+	display: grid;
+	height: fit-content;
+	width: 100%;
+	padding: 1em 0;
+	text-align: left;
+	color: white;
+	background: #000;
+	box-shadow: rgb(73, 73, 73) 0px 20px 30px -10px;
+	grid-template-columns: auto;
+	grid-template-rows: auto auto auto;
+}
+
+.pater:hover {
+	color: #292929;
+}
+
+.pater::before {
+	content: 'Audio Controls';
+	font-size: 0.75em;
+	display: inline-block;
+	padding: 0 0 5px 10px;
+	vertical-align: middle;
+	grid-area: 1 / 1 / 2 / 2;
+}
+
+.pater__img {
+	display: none;
+	background-image: url(hotjar.png);
+	background-size: cover;
+	grid-area: 2 / 1 / 3 / 2;
+}
+
+.pater__title {
+	display: block;
+	transition: opacity 0.5s;
+	font-size: 0.85em;
+	font-weight: bold;
+	align-self: end;
+	margin: 0;
+}
+
+.pater__description {
+	display: none;
+	opacity: 0;
+	transition: opacity 0.5s;
+	font-size: 1.20em;
+	margin-top: 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	font-family: 'Merriweather', serif; /* Use a stylish serif font */
+}
+
+.site_title {
+	
+	color: #fff;
+	font-size: 3.20em;
+	margin-top: 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+	
+	font-family: 'Merriweather', serif; /* Use a stylish serif font */
+}
+/* Header */
+.nav-header {
+	position: relative;
+	z-index: 100;
+	display: flex;
+	flex-direction: row;
+	align-items: flex-start;
+	align-items: center;
+	align-self: start;
+	grid-area: header;
+	justify-self: start;
+}
+
+.nav-header:hover {
+color: #000;
+}
+
+
+.header_item {
+	color: #000000;
+	font-size: 1.20em;
+	margin-top: 1rem;
+	padding-left: 1rem;
+	padding-right: 1rem;
+
+}
+
+.header_item:hover {
+	color: #ffffff;
+
+	box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+	transition: 0.3s;
+	border-radius: 0.3rem;
+
+}
+
+.pater__description strong {
+	display: block;
+	padding-top: 5px;
+	color: #e53f3e;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif !important;
+}
+
+.audio-button {
+    background: none;
+    border: none;
+    padding: 0;
+    margin: 0;
+    cursor: pointer;
+}
+
+.audio-button .size-6 {
+    width: 24px;
+    height: 24px;
+    display: block;
+    fill: currentColor;
+}
+
+.unmute-icon,
+.mute-icon {
+    width: 24px;
+    height: 24px;
+    display: block;
+    fill: currentColor;
+}
+
+@media screen and (min-width: 60em) {
+	.pater {
+		top: 0;
+		right: 0;
+		bottom: auto;
+		width: calc(500px + 2em);
+		margin: 0 8em 0 0;
+		padding: 0;
+		padding: 1em;
+		background: #fff;
+		color: #000;
+	}
+	.pater__img {
+		display: flex;
+		width: 100%;
+		height: 86px;
+		transition: transform 0.5s;
+	}
+	.pater:hover .pater__img {
+		transform: translate3d(0,-10px,0);
+	}
+	.pater::before {
+		display: block;
+		text-align: left;
+		padding: 0 0 10px 0;
+	}
+	.pater:hover .pater__title {
+		opacity: 0;
+	}
+	.pater:hover .pater__description {
+		opacity: 1;
+		
+	}
+	.pater__description {
+		display: block;
+	}
+	.pater__title {
+		font-size: 1em;
+		padding: 20px 10px 0 10px;
+	}
+	.pater__title,
+	.pater__description {
+		padding-left: 0;
+		transition: opacity 0.5s;
+		grid-area: 3 / 1 / 4 / 2;
+	}
+}

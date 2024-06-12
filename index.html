@@ -1,101 +1,132 @@
 <!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PixiJS Starfield</title>
-    <style>
-        body {
-            margin: 0;
-            overflow: hidden;
-        }
-    </style>
-</head>
-<body>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/pixi.js/5.3.10/pixi.min.js"></script>
-    <script>
-        window.onload = async () => {
-            const Application = PIXI.Application;
-            const Assets = PIXI.Loader.shared;
-            const Sprite = PIXI.Sprite;
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Photo Gallery</title>
 
-            const app = new Application();
-            document.body.appendChild(app.view);
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<link rel="stylesheet" type="text/css" href="css/component.css" />
+		<link rel="stylesheet" type="text/css" href="css/main.css" />
+		<link href="https://fonts.googleapis.com/css2?family=Merriweather:wght@400;700&display=swap" rel="stylesheet">
+		<script>document.documentElement.className = 'js';</script>
+	</head>
+	<body class="demo-3 loading">
+		<svg class="hidden">
+			<symbol id="icon-arrow-nav" viewBox="208.3 352 4.2 6.4">
+				<title>arrow-nav</title>
+				<polygon points="212.1,357.3 211.5,358 208.7,355.1 211.5,352.3 212.1,353 209.9,355.1"></polygon>
+			</symbol>
+		</svg>
+		<main class="site-wrapper">
+			<div class="content content--fixed">
+				<header class="nav-header">
+					<h1 class="site_title">Photo Gallery</h1>
+					<a class="header_item" href="index2.html"><span> <h3> Video</h3></span></a>
+					<a class="header_item" href="index.html"><span> <h3> Other</h3></span></a>
+				</header>
+				
+				
+				<a class="pater" href="#">
+					<h3 class="pater__title" id="title-1">Lunch atop a Skyscraper - Unknown, 1932</h3>
+					<div class="pater__description" id="description-1">
+						<h3>Lunch atop a Skyscraper - Unknown, 1932</h3>
+						<p>"Lunch atop a Skyscraper" is one of the most iconic photographs of the 20th century, capturing the spirit and daring of the construction workers who built New York City's skyline during the Great Depression. Taken in 1932, the black-and-white image depicts eleven construction workers casually seated on a steel beam high above Manhattan, enjoying their lunch break with the city sprawling beneath them.</p>
+						<p>In the photo, the workers appear relaxed, with some sitting and others standing, all seemingly unfazed by the dizzying height and precariousness of their position. They are dressed in typical work attire of the time, including work boots, trousers, and shirts, with a few sporting caps or hats to shield their faces from the sun.</p>
+						<p>Despite the apparent calmness, the conditions these workers faced were anything but easy. Safety measures were minimal compared to today's standards, and the risk of injury or death was ever-present. The workers had to contend with strong winds, swaying steel beams, and the constant noise and chaos of the construction site. Yet, in the midst of these challenges, they found moments of camaraderie and humor, as seen in the photograph.</p>
+						<p>Their lunch break, captured in the image, serves as a testament to the resilience and spirit of the American worker during a time of economic hardship. It has since become a symbol of the can-do attitude and perseverance that defined the construction of New York City's skyline and the nation's collective effort to rebuild and progress during difficult times.</p>
+						
+					</div>
+					<audio id="audio-1" src="audio/audio_1.mp3" preload="auto"></audio>
+					<div class="audio-controls">
+						<button id="play-1" class="audio-button" onclick="playAudio(1)">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+								<path fill-rule="evenodd" d="M4.5 5.653c0-1.427 1.529-2.33 2.779-1.643l11.54 6.347c1.295.712 1.295 2.573 0 3.286L7.28 19.99c-1.25.687-2.779-.217-2.779-1.643V5.653Z" clip-rule="evenodd" />
+							</svg>
+						</button>
+						<button id="pause-1" class="audio-button" onclick="pauseAudio(1)" style="display:none;">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+								<path fill-rule="evenodd" d="M6.75 5.25a.75.75 0 0 1 .75-.75H9a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H7.5a.75.75 0 0 1-.75-.75V5.25Zm7.5 0A.75.75 0 0 1 15 4.5h1.5a.75.75 0 0 1 .75.75v13.5a.75.75 0 0 1-.75.75H15a.75.75 0 0 1-.75-.75V5.25Z" clip-rule="evenodd" />
+							</svg>
+						</button>
+						<button id="reset-1" class="audio-button" onclick="resetAudio(1)" style="display:none;">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6">
+								<path d="M9.195 18.44c1.25.714 2.805-.189 2.805-1.629v-2.34l6.945 3.968c1.25.715 2.805-.188 2.805-1.628V8.69c0-1.44-1.555-2.343-2.805-1.628L12 11.029v-2.34c0-1.44-1.555-2.343-2.805-1.628l-7.108 4.061c-1.26.72-1.26 2.536 0 3.256l7.108 4.061Z" />
+							</svg>
+						</button>
+						<button id="mute-1" class="audio-button" onclick="toggleMute(1)">
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 unmute-icon">
+								<path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM18.584 5.106a.75.75 0 0 1 1.06 0c3.808 3.807 3.808 9.98 0 13.788a.75.75 0 0 1-1.06-1.06 8.25 8.25 0 0 0 0-11.668.75.75 0 0 1 0-1.06Z" />
+								<path d="M15.932 7.757a.75.75 0 0 1 1.061 0 6 6 0 0 1 0 8.486.75.75 0 0 1-1.06-1.061 4.5 4.5 0 0 0 0-6.364.75.75 0 0 1 0-1.06Z" />
+							  </svg>
+							  
+							<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" class="size-6 mute-icon" style="display:none;">
+								<path d="M13.5 4.06c0-1.336-1.616-2.005-2.56-1.06l-4.5 4.5H4.508c-1.141 0-2.318.664-2.66 1.905A9.76 9.76 0 0 0 1.5 12c0 .898.121 1.768.35 2.595.341 1.24 1.518 1.905 2.659 1.905h1.93l4.5 4.5c.945.945 2.561.276 2.561-1.06V4.06ZM17.78 9.22a.75.75 0 1 0-1.06 1.06L18.44 12l-1.72 1.72a.75.75 0 1 0 1.06 1.06l1.72-1.72 1.72 1.72a.75.75 0 1 0 1.06-1.06L20.56 12l1.72-1.72a.75.75 0 1 0-1.06-1.06l-1.72 1.72-1.72-1.72Z" />
+							</svg>
+						</button>
+					</div>
+				</a>
+			</div>
+			<div class="content">
+				<div class="slide-wrapper">
+					<div class="slide-item">
+						<img src="img/7.jpg" class="slide-item__image">
+						<h3 class="slide-item__title"></h3>
+					</div>
+					<div class="slide-item">
+						<img src="img/8.jpg" class="slide-item__image">
+						<h3 class="slide-item__title"></h3>
+					</div>
+					<div class="slide-item">
+						<img src="img/9.jpg" class="slide-item__image">
+						<h3 class="slide-item__title"></h3>
+					</div>				
+				</div>
+				<button class="scene-nav scene-nav--prev" data-nav="previous"><svg class="icon icon--arrow-nav-prev"><use xlink:href="#icon-arrow-nav"></use></svg></button>
+				<button class="scene-nav scene-nav--next" data-nav="next"><svg class="icon icon--arrow-nav-next"><use xlink:href="#icon-arrow-nav"></use></svg></button>				
+			</div>
+		</main>
+		<script src="js/demo.js"></script>
+		<script src="js/pixi.min.js"></script>
+		<script src="js/TweenMax.min.js"></script>
+		<script src="js/main3.js"></script>
+		<script src="js/mouse-trail.js"></script>
+		<script src="js/imagesloaded.pkgd.min.js"></script>
+		   <script src="js/audio.js"></script>
+		<script>
+			imagesLoaded(document.body, () => document.body.classList.remove('loading'));
+			
+			var spriteImages = document.querySelectorAll( '.slide-item__image' );
+			var spriteImagesSrc = [];
+			var texts = [];
 
-            const starTexture = await loadTexture('https://pixijs.com/assets/star.png');
+			for ( var i = 0; i < spriteImages.length; i++ ) {
 
-            const starAmount = 1000;
-            let cameraZ = 0;
-            const fov = 20;
-            const baseSpeed = 0.025;
-            let speed = 0;
-            let warpSpeed = 0;
-            const starStretch = 5;
-            const starBaseSize = 0.05;
+				var img = spriteImages[i];
+				// Set the texts you want to display to each slide 
+				// in a sibling element of your image and edit accordingly
+				if ( img.nextElementSibling ) {
+					texts.push(img.nextElementSibling.innerHTML);
+				} else {
+					texts.push('');
+				}
+				spriteImagesSrc.push( img.getAttribute('src' ) );
 
-            const stars = [];
+			}
 
-            for (let i = 0; i < starAmount; i++) {
-                const star = {
-                    sprite: new Sprite(starTexture),
-                    z: 0,
-                    x: 0,
-                    y: 0,
-                };
-
-                star.sprite.anchor.set(0.5, 0.7);
-                randomizeStar(star, true);
-                app.stage.addChild(star.sprite);
-                stars.push(star);
-            }
-
-            function randomizeStar(star, initial) {
-                star.z = initial ? Math.random() * 2000 : cameraZ + Math.random() * 1000 + 2000;
-
-                const deg = Math.random() * Math.PI * 2;
-                const distance = Math.random() * 50 + 1;
-
-                star.x = Math.cos(deg) * distance;
-                star.y = Math.sin(deg) * distance;
-            }
-
-            setInterval(() => {
-                warpSpeed = warpSpeed > 0 ? 0 : 1;
-            }, 5000);
-
-            app.ticker.add((time) => {
-                speed += (warpSpeed - speed) / 20;
-                cameraZ += time.deltaTime * 10 * (speed + baseSpeed);
-                for (let i = 0; i < starAmount; i++) {
-                    const star = stars[i];
-
-                    if (star.z < cameraZ) randomizeStar(star);
-
-                    const z = star.z - cameraZ;
-
-                    star.sprite.x = star.x * (fov / z) * app.renderer.screen.width + app.renderer.screen.width / 2;
-                    star.sprite.y = star.y * (fov / z) * app.renderer.screen.width + app.renderer.screen.height / 2;
-
-                    const dxCenter = star.sprite.x - app.renderer.screen.width / 2;
-                    const dyCenter = star.sprite.y - app.renderer.screen.height / 2;
-                    const distanceCenter = Math.sqrt(dxCenter * dxCenter + dyCenter * dyCenter);
-                    const distanceScale = Math.max(0, (2000 - z) / 2000);
-
-                    star.sprite.scale.set(distanceScale * starBaseSize,
-                        distanceScale * starBaseSize
-                        + (distanceScale * speed * starStretch * distanceCenter) / app.renderer.screen.width);
-                    star.sprite.rotation = Math.atan2(dyCenter, dxCenter) + Math.PI / 2;
-                }
-            });
-
-            async function loadTexture(url) {
-                return new Promise(resolve => {
-                    Assets.add(url).load(() => {
-                        resolve(Assets.resources[url].texture);
-                    });
-                });
-            }
-        };
-    </script>
-</body>
+			var initCanvasSlideshow = new CanvasSlideshow({
+				sprites: spriteImagesSrc,
+				displacementImage: 'img/dmaps/2048x2048/crystalize.jpg',
+				autoPlay: false,
+				displaceScale: [500, 500],
+				fullScreen: true,
+				wacky: true,
+				texts: texts,
+				textColor: "#224d94",
+				centerSprites: true,
+				wacky: true
+			});
+		</script>
+	</body>
 </html>
